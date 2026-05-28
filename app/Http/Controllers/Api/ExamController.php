@@ -81,6 +81,7 @@ class ExamController extends Controller
             $questions = Question::where('is_practice', false)
                 ->where('subject', $session->subject)
                 ->inRandomOrder()
+                ->limit(25)
                 ->get();
         }
 

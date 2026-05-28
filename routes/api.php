@@ -12,7 +12,7 @@ Route::post('/submit', [ExamController::class, 'submitExam']);
 
 Route::prefix('admin')->group(function () {
     Route::post('/login', [AdminController::class, 'login']);
-    Route::post('/dashboard', [AdminController::class, 'getDashboardData']);
-    Route::post('/update-setings', [AdminController::class, 'updateSettings']);
-    Route::post('/leaderboard/{subject}/{class}', [AdminController::class, 'getLeaderboard']);
+    Route::get('/dashboard', [AdminController::class, 'getDashboardData']);
+    Route::post('/update-settings', [AdminController::class, 'updateSettings']);
+    Route::get('/leaderboard/{subject}/{class}', [AdminController::class, 'getLeaderboard']);
 });

@@ -56,24 +56,40 @@ export default function App() {
 
   useEffect(() => {
     if (!sessionId) return;
+
     const fetchQuestions = async () => {
       try {
         const res = await axios.get(`/questions?session_id=${sessionId}`);
-        setQuestions(res.data.data);
         
         // Pemicu otomatis masuk ujian jika admin klik Mulai
         if (view === 'waiting-room' && res.data.status === 'started') {
-          Swal.fire({ icon: 'info', title: 'Ujian Dimulai!', text: 'Pengawas telah mengaktifkan sesi ujian utama.', timer: 2000, showConfirmButton: false, background: '#0f172a', color: '#f8fafc' });
+          Swal.fire({ 
+            icon: 'info', 
+            title: 'Ujian Dimulai!', 
+            text: 'Pengawas telah mengaktifkan sesi ujian utama.', 
+            timer: 2000, 
+            showConfirmButton: false, 
+            background: '#0f172a', 
+            color: '#f8fafc' 
+          });
           setView('exam');
           localStorage.setItem('app_view', 'exam');
+
+          setQuestions(res.data.data); 
+        } else if (view === 'waiting-room' || questions.length === 0) {
+          // Render soal hanya di ruang tunggu ATAU jika array soal di ujian masih kosong (baru dimuat)
+          setQuestions(res.data.data);
         }
+
       } catch (err) {
         console.error("Gagal mengambil materi soal", err);
       }
     };
-    fetchQuestions();
-    const interval = setInterval(fetchQuestions, 4000);
-    return () => clearInterval(interval);
+
+    if (view === 'waiting-room') {
+      const interval = setInterval(fetchQuestions, 4000);
+      return () => clearInterval(interval);
+    }
   }, [sessionId, view]);
 
   useEffect(() => {
@@ -140,7 +156,7 @@ export default function App() {
 
   const fetchAdminDashboard = async () => {
     try {
-      const res = await axios.get('/admin/dashboard');
+      const res = await axios.get('/admin/dashboard?t=' + new Date().getTime());
       setAdminDashboard(res.data);
     } catch (err) {
       console.error(err);
@@ -171,7 +187,7 @@ export default function App() {
 
   const fetchLeaderboard = async () => {
     try {
-      const res = await axios.get(`/admin/leaderboard/${filterLeaderboard.subject}/${filterLeaderboard.class}`);
+      const res = await axios.get(`/admin/leaderboard/${filterLeaderboard.subject}/${filterLeaderboard.class}?t=${new Date().getTime()}`);
       setLeaderboardData(res.data.data);
     } catch (err) {
       console.error(err);
@@ -263,7 +279,7 @@ export default function App() {
                 <label className="text-xs uppercase tracking-wider text-slate-400 font-bold block mb-2 pl-1">Mata Pelajaran</label>
                 <select value={studentForm.subject} onChange={e => setStudentForm({...studentForm, subject: e.target.value})} className="w-full px-5 py-3.5 bg-slate-950/80 border border-slate-700/60 rounded-xl outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500/50 text-sm text-slate-200 transition-all font-medium cursor-pointer">
                   <option value="python">Python Programming (Kelas 8)</option>
-                  <option value="edublocks">EduBlocks Logic (Kelas 7)</option>
+                  <option value="logika"> Logic (Kelas 7)</option>
                 </select>
               </div>
               <div>
@@ -564,7 +580,7 @@ export default function App() {
                 <div className="flex gap-3 items-center w-full sm:w-auto">
                   <select value={filterLeaderboard.subject} onChange={e => setFilterLeaderboard({...filterLeaderboard, subject: e.target.value})} className="px-4 py-2 bg-slate-950 border border-slate-700 text-slate-200 text-xs rounded-xl outline-none focus:border-emerald-500 font-bold cursor-pointer transition-colors shadow-inner">
                     <option value="python">Materi: Python</option>
-                    <option value="edublocks">Materi: EduBlocks</option>
+                    <option value="logika">Materi: logika</option>
                   </select>
                   <input type="text" placeholder="Semua Kelas" value={filterLeaderboard.class === 'all' ? '' : filterLeaderboard.class} onChange={e => setFilterLeaderboard({...filterLeaderboard, class: e.target.value.toUpperCase() || 'all'})} className="w-32 px-4 py-2 bg-slate-950 border border-slate-700 text-xs text-center rounded-xl outline-none focus:border-emerald-500 font-bold text-slate-200 placeholder-slate-600 uppercase shadow-inner transition-colors" />
                 </div>

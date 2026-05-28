@@ -42,7 +42,7 @@ class AdminController extends Controller
             'exam_duration' => 'required|integer'
         ]);
 
-        Setting:where('key', 'exam_status')->update(['value' => $request->exam_status]);
+        Setting::where('key', 'exam_status')->update(['value' => $request->exam_status]);
         Setting::where('key', 'current_token')->update(['value' => strtoupper($request->current_token)]);
         Setting::where('key', 'token_expired_at')->update(['value' => now()->addMinutes(120)->format('Y-m-d H:i:s')]);
         Setting::where('key', 'exam_duration')->update(['value' => $request->exam_duration]);
