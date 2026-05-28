@@ -3,20 +3,19 @@ import axios from 'axios';
 import Swal from 'sweetalert2';
 import { Shield, GraduationCap, Trophy, LogOut, CheckCircle, Clock, BookOpen, AlertTriangle, ChevronRight, ChevronLeft, HelpCircle } from 'lucide-react';
 
-// Sesuaikan URL Base dengan alamat Web Server Laragon kamu
 axios.defaults.baseURL = 'http://localhost:8000/api';
 
 export default function App() {
-  // Navigation State
-  const [view, setView] = useState('login-student'); // login-student, waiting-room, exam, review, login-admin, admin-dashboard
+  // Navigation State (Diambil dari Local Storage agar anti-refresh)
+  const [view, setView] = useState(localStorage.getItem('app_view') || 'login-student'); 
 
-  // Student State
+  // Student State (Di-backup ke Local Storage)
   const [studentForm, setStudentForm] = useState({ name: '', class: '', subject: 'python', token: '' });
-  const [sessionId, setSessionId] = useState(null);
-  const [remainingTime, setRemainingTime] = useState(0);
+  const [sessionId, setSessionId] = useState(localStorage.getItem('app_session') || null);
+  const [remainingTime, setRemainingTime] = useState(localStorage.getItem('app_timer') ? parseInt(localStorage.getItem('app_timer')) : 0);
   const [questions, setQuestions] = useState([]);
   const [currentIdx, setCurrentIdx] = useState(0);
-  const [answers, setAnswers] = useState({});
+  const [answers, setAnswers] = useState(JSON.parse(localStorage.getItem('app_answers')) || {});
   const [examResultSummary, setExamResultSummary] = useState([]);
   const [finalScore, setFinalScore] = useState(0);
 
@@ -37,31 +36,21 @@ export default function App() {
     try {
       const res = await axios.post('/login', studentForm);
       if (res.data.success) {
+        // Simpan sesi ke memori browser agar anti logout
         setSessionId(res.data.session_id);
+        localStorage.setItem('app_session', res.data.session_id);
+        
         setRemainingTime(res.data.remaining_time);
-        Swal.fire({ 
-          icon: 'success', 
-          title: 'Autentikasi Berhasil', 
-          text: 'Selamat datang di ruang ujian.', 
-          timer: 1500, 
-          showConfirmButton: false,
-          background: '#0f172a',
-          color: '#f8fafc'
-        });
-        if (res.data.exam_status === 'waiting') {
-          setView('waiting-room');
-        } else {
-          setView('exam');
-        }
+        localStorage.setItem('app_timer', res.data.remaining_time);
+
+        Swal.fire({ icon: 'success', title: 'Autentikasi Berhasil', text: 'Selamat datang di ruang ujian.', timer: 1500, showConfirmButton: false, background: '#0f172a', color: '#f8fafc' });
+        
+        const nextView = res.data.exam_status === 'waiting' ? 'waiting-room' : 'exam';
+        setView(nextView);
+        localStorage.setItem('app_view', nextView); // Kunci halaman saat ini
       }
     } catch (err) {
-      Swal.fire({ 
-        icon: 'error', 
-        title: 'Gagal Masuk', 
-        text: err.response?.data?.message || 'Terjadi kesalahan sistem.',
-        background: '#0f172a',
-        color: '#f8fafc'
-      });
+      Swal.fire({ icon: 'error', title: 'Gagal Masuk', text: err.response?.data?.message || 'Terjadi kesalahan sistem.', background: '#0f172a', color: '#f8fafc' });
     }
   };
 
@@ -71,17 +60,12 @@ export default function App() {
       try {
         const res = await axios.get(`/questions?session_id=${sessionId}`);
         setQuestions(res.data.data);
+        
+        // Pemicu otomatis masuk ujian jika admin klik Mulai
         if (view === 'waiting-room' && res.data.status === 'started') {
-          Swal.fire({ 
-            icon: 'info', 
-            title: 'Ujian Dimulai!', 
-            text: 'Pengawas telah mengaktifkan sesi ujian utama.', 
-            timer: 2000, 
-            showConfirmButton: false,
-            background: '#0f172a',
-            color: '#f8fafc'
-          });
+          Swal.fire({ icon: 'info', title: 'Ujian Dimulai!', text: 'Pengawas telah mengaktifkan sesi ujian utama.', timer: 2000, showConfirmButton: false, background: '#0f172a', color: '#f8fafc' });
           setView('exam');
+          localStorage.setItem('app_view', 'exam');
         }
       } catch (err) {
         console.error("Gagal mengambil materi soal", err);
@@ -97,6 +81,8 @@ export default function App() {
     timerRef.current = setInterval(() => {
       setRemainingTime((prev) => {
         const nextTime = prev - 1;
+        localStorage.setItem('app_timer', nextTime); // Backup timer per detik!
+        
         if (nextTime % 10 === 0) {
           axios.post('/sync-session', { session_id: sessionId, remaining_time: nextTime, answers });
         }
@@ -111,7 +97,9 @@ export default function App() {
   }, [view, answers]);
 
   const handleSelectAnswer = (questionId, option) => {
-    setAnswers({ ...answers, [questionId]: option });
+    const newAnswers = { ...answers, [questionId]: option };
+    setAnswers(newAnswers);
+    localStorage.setItem('app_answers', JSON.stringify(newAnswers)); // Backup jawaban saat itu juga!
   };
 
   const handleFormatSubmit = async () => {
@@ -122,23 +110,13 @@ export default function App() {
         setFinalScore(res.data.score);
         const resQuestions = await axios.get(`/questions?session_id=${sessionId}`);
         setExamResultSummary(resQuestions.data.data);
-        Swal.fire({ 
-          icon: 'success', 
-          title: 'Ujian Selesai', 
-          text: 'Jawaban kamu telah aman tersimpan di database.',
-          background: '#0f172a',
-          color: '#f8fafc'
-        });
+        Swal.fire({ icon: 'success', title: 'Ujian Selesai', text: 'Jawaban kamu telah aman tersimpan di database.', background: '#0f172a', color: '#f8fafc' });
+        
         setView('review');
+        localStorage.setItem('app_view', 'review');
       }
     } catch (err) {
-      Swal.fire({ 
-        icon: 'error', 
-        title: 'Gagal Mengirim', 
-        text: 'Koneksi bermasalah saat mengirim lembar jawaban.',
-        background: '#0f172a',
-        color: '#f8fafc'
-      });
+      Swal.fire({ icon: 'error', title: 'Gagal Mengirim', text: 'Koneksi bermasalah saat mengirim lembar jawaban.', background: '#0f172a', color: '#f8fafc' });
     }
   };
 
@@ -149,26 +127,14 @@ export default function App() {
     try {
       const res = await axios.post('/admin/login', adminForm);
       if (res.data.success) {
-        Swal.fire({ 
-          icon: 'success', 
-          title: 'Akses Diterima', 
-          text: 'Selamat datang, Pengawas.', 
-          timer: 1500, 
-          showConfirmButton: false,
-          background: '#0f172a',
-          color: '#f8fafc'
-        });
+        Swal.fire({ icon: 'success', title: 'Akses Diterima', text: 'Selamat datang, Pengawas.', timer: 1500, showConfirmButton: false, background: '#0f172a', color: '#f8fafc' });
         fetchAdminDashboard();
+        
         setView('admin-dashboard');
+        localStorage.setItem('app_view', 'admin-dashboard'); // Kunci admin agar tidak ter-logout saat direfresh
       }
     } catch (err) {
-      Swal.fire({ 
-        icon: 'error', 
-        title: 'Akses Ditolak', 
-        text: 'Email atau Password Admin salah!',
-        background: '#0f172a',
-        color: '#f8fafc'
-      });
+      Swal.fire({ icon: 'error', title: 'Akses Ditolak', text: 'Email atau Password Admin salah!', background: '#0f172a', color: '#f8fafc' });
     }
   };
 
@@ -181,34 +147,25 @@ export default function App() {
     }
   };
 
+  // FIX BUG EVENT: Memastikan parameter berwujud teks yang sah
   const handleSaveSettings = async (updatedStatus) => {
     try {
+      // Cegah error akibat parameter MouseEvent saat tombol diklik kosong
+      const finalStatus = typeof updatedStatus === 'string' ? updatedStatus : adminDashboard.exam_status;
+      
       const payload = {
-        exam_status: updatedStatus || adminDashboard.exam_status,
+        exam_status: finalStatus,
         current_token: adminDashboard.current_token,
         exam_duration: parseInt(adminDashboard.exam_duration)
       };
+      
       const res = await axios.post('/admin/update-settings', payload);
       if (res.data.success) {
-        Swal.fire({ 
-          icon: 'success', 
-          title: 'Berhasil', 
-          text: 'Pengaturan sistem ujian diperbarui!', 
-          timer: 1500, 
-          showConfirmButton: false,
-          background: '#0f172a',
-          color: '#f8fafc'
-        });
+        Swal.fire({ icon: 'success', title: 'Berhasil', text: 'Pengaturan sistem ujian diperbarui!', timer: 1500, showConfirmButton: false, background: '#0f172a', color: '#f8fafc' });
         fetchAdminDashboard();
       }
     } catch (err) {
-      Swal.fire({ 
-        icon: 'error', 
-        title: 'Gagal', 
-        text: 'Gagal memperbarui pengaturan.',
-        background: '#0f172a',
-        color: '#f8fafc'
-      });
+      Swal.fire({ icon: 'error', title: 'Gagal', text: err.response?.data?.message || 'Gagal memperbarui pengaturan.', background: '#0f172a', color: '#f8fafc' });
     }
   };
 
@@ -238,6 +195,16 @@ export default function App() {
     return `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
   };
 
+  // Fungsi Log Out Aman yang Membersihkan Memory Browser
+  const handleLogout = () => {
+    clearInterval(timerRef.current); 
+    localStorage.clear(); // Sapu bersih semua memori!
+    setSessionId(null); 
+    setQuestions([]); 
+    setAnswers({});
+    setView('login-student');
+  };
+
   return (
     <div className="min-h-screen bg-[#020617] text-slate-100 flex flex-col justify-between font-sans selection:bg-emerald-500 selection:text-slate-950">
       
@@ -263,12 +230,7 @@ export default function App() {
           </button>
         ) : (
           <button 
-            onClick={() => { 
-              clearInterval(timerRef.current); 
-              setSessionId(null); 
-              setQuestions([]); 
-              setView('login-student'); 
-            }} 
+            onClick={handleLogout} 
             className="flex items-center gap-2 text-xs font-bold text-slate-400 bg-slate-900/60 border border-slate-800 px-5 py-2.5 rounded-xl hover:text-rose-400 hover:border-rose-500/30 hover:bg-rose-500/10 transition-all duration-300"
           >
             <LogOut className="w-4 h-4" /> Keluar Sesi
