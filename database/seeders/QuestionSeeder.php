@@ -14,6 +14,21 @@ class QuestionSeeder extends Seeder
     {
 
         $questions = [
+
+            // =========================
+            // SOAL LATIHAN
+            // =========================
+            [
+                'question_text'     => 'Ini soal pemanasan ruang tunggu. Berapa hasil dari 5 x 5?',
+
+                'option_a'          => '20',
+                'option_b'          => '25',
+                'option_c'          => '30',
+                'option_d'          => '35',
+                'correct_answer'    => 'B',
+                'is_practice'       => true,
+                'subject'           => 'all',
+            ],
         
             // =========================
             // SOAL 1
@@ -28,7 +43,7 @@ class QuestionSeeder extends Seeder
                 'correct_answer'    => 'B',
                 'explanation'       => 'Python terkenal karena sintaksnya mudah dibaca dan fleksibel digunakan di banyak bidang.',
                 'is_practice'       => false,
-                'target_class'      => '7',
+                'subject'           => 'python',
             ],
 
             // =========================
@@ -44,7 +59,7 @@ class QuestionSeeder extends Seeder
                 'correct_answer'    => 'C',
                 'explanation'       => 'Python dikembangkan oleh Guido van Rossum pada akhir 1980-an.',
                 'is_practice'       => false,
-                'target_class'      => '7',
+                'subject'           => 'python',
             ],
 
             // =========================
@@ -60,7 +75,7 @@ class QuestionSeeder extends Seeder
                 'correct_answer'    => 'C',
                 'explanation'       => 'Python digunakan di banyak bidang teknologi, bukan untuk edit video manual.',
                 'is_practice'       => false,
-                'target_class'      => '7',
+                'subject'           => 'python',
             ],
 
             // =========================
@@ -76,7 +91,7 @@ class QuestionSeeder extends Seeder
                 'correct_answer'    => 'C',
                 'explanation'       => 'Edublock membantu transisi dari block coding ke text coding.',
                 'is_practice'       => false,
-                'target_class'      => '7',
+                'subject'           => 'python',
             ],
 
             // =========================
@@ -92,7 +107,7 @@ class QuestionSeeder extends Seeder
                 'correct_answer'    => 'B',
                 'explanation'       => 'Tombol Run digunakan untuk menjalankan program.',
                 'is_practice'       => false,
-                'target_class'      => '7',
+                'subject'           => 'python',
             ],
 
             // =========================
@@ -107,8 +122,8 @@ class QuestionSeeder extends Seeder
                 'option_d'          => 'Menyimpan file',
                 'correct_answer'    => 'C',
                 'explanation'       => 'print() digunakan untuk menampilkan hasil ke layar.',
-                'is_practice' => false,
-                'target_class' => '7',
+                'is_practice'       => false,
+                'subject'           => 'python',
             ],
 
             // =========================
@@ -122,7 +137,9 @@ class QuestionSeeder extends Seeder
                 'option_c'          => 'Mengulang program',
                 'option_d'          => 'Menghapus variabel',
                 'correct_answer'    => 'B',
-                'explanation'       => 'input() digunakan menerima data dari user.'
+                'explanation'       => 'input() digunakan menerima data dari user.',
+                'is_practice'       => false,
+                'subject'           => 'python',
             ],
 
             // =========================
@@ -136,7 +153,9 @@ class QuestionSeeder extends Seeder
                 'option_c'          => 'nama_siswa',
                 'option_d'          => 'nama@siswa',
                 'correct_answer'    => 'C',
-                'explanation'       => 'Variabel tidak boleh diawali angka, memakai spasi, atau simbol khusus.'
+                'explanation'       => 'Variabel tidak boleh diawali angka, memakai spasi, atau simbol khusus.',
+                'is_practice'       => false,
+                'subject'           => 'python',
             ],
 
             // =========================
@@ -150,7 +169,9 @@ class QuestionSeeder extends Seeder
                 'option_c'          => '+',
                 'option_d'          => '/',
                 'correct_answer'    => 'C',
-                'explanation'       => 'Tanda + digunakan untuk operasi tambah.'
+                'explanation'       => 'Tanda + digunakan untuk operasi tambah.',
+                'is_practice'       => false,
+                'subject'           => 'python',
             ],
 
             // =========================
@@ -164,7 +185,9 @@ class QuestionSeeder extends Seeder
                 'option_c'          => '0',
                 'option_d'          => '10',
                 'correct_answer'    => 'B',
-                'explanation'       => 'Operator modulus mengambil sisa pembagian. 10 dibagi 3 sisanya 1.'
+                'explanation'       => 'Operator modulus mengambil sisa pembagian. 10 dibagi 3 sisanya 1.',
+                'is_practice'       => false,
+                'subject'           => 'python',
             ],
 
             // =========================
@@ -178,7 +201,9 @@ class QuestionSeeder extends Seeder
                 'option_c'          => 'Operasi matematika',
                 'option_d'          => 'Membuat list',
                 'correct_answer'    => 'C',
-                'explanation'       => 'Operator aritmatika digunakan untuk perhitungan matematika.'
+                'explanation'       => 'Operator aritmatika digunakan untuk perhitungan matematika.',
+                'is_practice'       => false,
+                'subject'           => 'python',
             ],
 
             // =========================
@@ -192,7 +217,9 @@ class QuestionSeeder extends Seeder
                 'option_c'          => 'Menghapus nilai',
                 'option_d'          => 'Menampilkan nilai',
                 'correct_answer'    => 'B',
-                'explanation'       => 'Tanda = digunakan untuk memasukkan nilai ke variabel.'
+                'explanation'       => 'Tanda = digunakan untuk memasukkan nilai ke variabel.',
+                'is_practice'       => false,
+                'subject'           => 'python',
             ],
 
             // =========================
@@ -206,7 +233,9 @@ class QuestionSeeder extends Seeder
                 'option_c'          => 'True dan False',
                 'option_d'          => 'Besar dan kecil',
                 'correct_answer'    => 'C',
-                'explanation'       => 'Boolean hanya memiliki dua nilai yaitu True dan False.'
+                'explanation'       => 'Boolean hanya memiliki dua nilai yaitu True dan False.',
+                'is_practice'       => false,
+                'subject'           => 'python',
             ],
 
             // =========================
@@ -220,7 +249,9 @@ class QuestionSeeder extends Seeder
                 'option_c'          => 'Lebih besar',
                 'option_d'          => 'Penjumlahan',
                 'correct_answer'    => 'B',
-                'explanation'       => 'Operator == digunakan untuk membandingkan apakah dua nilai sama.'
+                'explanation'       => 'Operator == digunakan untuk membandingkan apakah dua nilai sama.',
+                'is_practice'       => false,
+                'subject'           => 'python',
             ],
 
             // =========================
@@ -234,7 +265,9 @@ class QuestionSeeder extends Seeder
                 'option_c'          => 'Tidak sama dengan',
                 'option_d'          => 'Kurang dari sama dengan',
                 'correct_answer'    => 'C',
-                'explanation'       => 'Operator != berarti kedua nilai berbeda.'
+                'explanation'       => 'Operator != berarti kedua nilai berbeda.',
+                'is_practice'       => false,
+                'subject'           => 'python',
             ],
 
             // =========================
@@ -248,7 +281,9 @@ class QuestionSeeder extends Seeder
                 'option_c'          => 'Error',
                 'option_d'          => '5',
                 'correct_answer'    => 'B',
-                'explanation'       => '5 memang lebih besar dari 2 sehingga hasilnya True.'
+                'explanation'       => '5 memang lebih besar dari 2 sehingga hasilnya True.',
+                'is_practice'       => false,
+                'subject'           => 'python',
             ],
 
             // =========================
@@ -262,7 +297,9 @@ class QuestionSeeder extends Seeder
                 'option_c'          => 'Membuat list',
                 'option_d'          => 'Menampilkan output',
                 'correct_answer'    => 'B',
-                'explanation'       => 'Operator logika dipakai untuk menghubungkan beberapa kondisi.'
+                'explanation'       => 'Operator logika dipakai untuk menghubungkan beberapa kondisi.',
+                'is_practice'       => false,
+                'subject'           => 'python',
             ],
 
             // =========================
@@ -276,7 +313,9 @@ class QuestionSeeder extends Seeder
                 'option_c'          => 'Mengambil keputusan',
                 'option_d'          => 'Menghapus variabel',
                 'correct_answer'    => 'C',
-                'explanation'       => 'Percabangan membuat program bisa memilih aksi berdasarkan kondisi.'
+                'explanation'       => 'Percabangan membuat program bisa memilih aksi berdasarkan kondisi.',
+                'is_practice'       => false,
+                'subject'           => 'python',
             ],
 
             // =========================
@@ -290,7 +329,9 @@ class QuestionSeeder extends Seeder
                 'option_c'          => 'if',
                 'option_d'          => 'range',
                 'correct_answer'    => 'C',
-                'explanation'       => 'if adalah dasar pengkondisian dalam Python.'
+                'explanation'       => 'if adalah dasar pengkondisian dalam Python.',
+                'is_practice'       => false,
+                'subject'           => 'python',
             ],
 
             // =========================
@@ -304,7 +345,9 @@ class QuestionSeeder extends Seeder
                 'option_c'          => 'Kondisi salah',
                 'option_d'          => 'Semua kondisi benar',
                 'correct_answer'    => 'C',
-                'explanation'       => 'else dijalankan jika kondisi pada if bernilai False.'
+                'explanation'       => 'else dijalankan jika kondisi pada if bernilai False.',
+                'is_practice'       => false,
+                'subject'           => 'python',
             ],
 
             // =========================
@@ -318,7 +361,9 @@ class QuestionSeeder extends Seeder
                 'option_c'          => 'Memeriksa kondisi tambahan',
                 'option_d'          => 'Menghapus kondisi',
                 'correct_answer'    => 'C',
-                'explanation'       => 'elif digunakan jika ada lebih dari satu kondisi yang diperiksa.'
+                'explanation'       => 'elif digunakan jika ada lebih dari satu kondisi yang diperiksa.',
+                'is_practice'       => false,
+                'subject'           => 'python',
             ],
 
             // =========================
@@ -332,7 +377,9 @@ class QuestionSeeder extends Seeder
                 'option_c'          => 'nilai if > 70',
                 'option_d'          => 'if: nilai > 70',
                 'correct_answer'    => 'B',
-                'explanation'       => 'Pada Python setelah kondisi if harus ada tanda titik dua (:).'
+                'explanation'       => 'Pada Python setelah kondisi if harus ada tanda titik dua (:).',
+                'is_practice'       => false,
+                'subject'           => 'python',
             ],
 
             // =========================
@@ -346,7 +393,9 @@ class QuestionSeeder extends Seeder
                 'option_c'          => 'Menyimpan file',
                 'option_d'          => 'Menghapus data',
                 'correct_answer'    => 'B',
-                'explanation'       => 'Loop digunakan agar program bisa mengulang perintah secara otomatis.'
+                'explanation'       => 'Loop digunakan agar program bisa mengulang perintah secara otomatis.',
+                'is_practice'       => false,
+                'subject'           => 'python',
             ],
 
             // =========================
@@ -360,7 +409,9 @@ class QuestionSeeder extends Seeder
                 'option_c'          => 'for',
                 'option_d'          => 'input',
                 'correct_answer'    => 'C',
-                'explanation'       => 'for digunakan jika jumlah pengulangannya sudah jelas.'
+                'explanation'       => 'for digunakan jika jumlah pengulangannya sudah jelas.',
+                'is_practice'       => false,
+                'subject'           => 'python',
             ],
 
             // =========================
@@ -374,7 +425,9 @@ class QuestionSeeder extends Seeder
                 'option_c'          => 'if',
                 'option_d'          => 'print',
                 'correct_answer'    => 'B',
-                'explanation'       => 'while akan terus berjalan selama kondisi bernilai True.'
+                'explanation'       => 'while akan terus berjalan selama kondisi bernilai True.',
+                'is_practice'       => false,
+                'subject'           => 'python',
             ],
 
             // =========================
@@ -388,7 +441,9 @@ class QuestionSeeder extends Seeder
                 'option_c'          => '6',
                 'option_d'          => 'Tak hingga',
                 'correct_answer'    => 'B',
-                'explanation'       => 'range(5) menghasilkan angka 0 sampai 4, jadi total 5 kali pengulangan.'
+                'explanation'       => 'range(5) menghasilkan angka 0 sampai 4, jadi total 5 kali pengulangan.',
+                'is_practice'       => false,
+                'subject'           => 'python',
             ],
 
             // =========================
@@ -402,7 +457,9 @@ class QuestionSeeder extends Seeder
                 'option_c'          => 'Variabel di dalam list',
                 'option_d'          => 'Percabangan bertingkat',
                 'correct_answer'    => 'B',
-                'explanation'       => 'Nested loop berarti ada perulangan di dalam perulangan lain.'
+                'explanation'       => 'Nested loop berarti ada perulangan di dalam perulangan lain.',
+                'is_practice'       => false,
+                'subject'           => 'python',
             ],
 
             // =========================
@@ -416,7 +473,9 @@ class QuestionSeeder extends Seeder
                 'option_c'          => 'Selesai dahulu sebelum loop luar lanjut',
                 'option_d'          => 'Menghentikan loop luar',
                 'correct_answer'    => 'C',
-                'explanation'       => 'Inner loop harus selesai dulu sebelum outer loop lanjut.'
+                'explanation'       => 'Inner loop harus selesai dulu sebelum outer loop lanjut.',
+                'is_practice'       => false,
+                'subject'           => 'python',
             ],
 
             // =========================
@@ -430,7 +489,9 @@ class QuestionSeeder extends Seeder
                 'option_c'          => 'Percabangan',
                 'option_d'          => 'Pengulangan',
                 'correct_answer'    => 'B',
-                'explanation'       => 'List digunakan untuk menyimpan banyak data sekaligus.'
+                'explanation'       => 'List digunakan untuk menyimpan banyak data sekaligus.',
+                'is_practice'       => false,
+                'subject'           => 'python',
             ],
 
             // =========================
@@ -444,7 +505,9 @@ class QuestionSeeder extends Seeder
                 'option_c'          => '0',
                 'option_d'          => '10',
                 'correct_answer'    => 'C',
-                'explanation'       => 'Python memulai index list dari angka 0.'
+                'explanation'       => 'Python memulai index list dari angka 0.',
+                'is_practice'       => false,
+                'subject'           => 'python',
             ],
 
             // =========================
@@ -458,7 +521,9 @@ class QuestionSeeder extends Seeder
                 'option_c'          => 'jeruk',
                 'option_d'          => 'error',
                 'correct_answer'    => 'B',
-                'explanation'       => 'Index ke-1 berarti data kedua dalam list, yaitu mangga.'
+                'explanation'       => 'Index ke-1 berarti data kedua dalam list, yaitu mangga.',
+                'is_practice'       => false,
+                'subject'           => 'python',
             ],
 
             // =========================
@@ -472,7 +537,9 @@ class QuestionSeeder extends Seeder
                 'option_c'          => 'Mengulang program',
                 'option_d'          => 'Membuat kondisi',
                 'correct_answer'    => 'B',
-                'explanation'       => 'List dipakai untuk menyimpan banyak nilai dalam satu variabel.'
+                'explanation'       => 'List dipakai untuk menyimpan banyak nilai dalam satu variabel.',
+                'is_practice'       => false,
+                'subject'           => 'python',
             ],
 
             // =========================
@@ -486,7 +553,9 @@ class QuestionSeeder extends Seeder
                 'option_c'          => '10',
                 'option_d'          => 'Error',
                 'correct_answer'    => 'B',
-                'explanation'       => '10 tidak lebih kecil atau sama dengan 5 sehingga hasilnya False.'
+                'explanation'       => '10 tidak lebih kecil atau sama dengan 5 sehingga hasilnya False.',
+                'is_practice'       => false,
+                'subject'           => 'python',
             ],
 
             // =========================
@@ -500,7 +569,9 @@ class QuestionSeeder extends Seeder
                 'option_c'          => '>=',
                 'option_d'          => '%',
                 'correct_answer'    => 'C',
-                'explanation'       => '>= adalah operator perbandingan yang berarti lebih besar atau sama dengan.'
+                'explanation'       => '>= adalah operator perbandingan yang berarti lebih besar atau sama dengan.',
+                'is_practice'       => false,
+                'subject'           => 'python',
             ],
 
             // =========================
@@ -514,7 +585,9 @@ class QuestionSeeder extends Seeder
                 'option_c'          => 'Menghapus variabel',
                 'option_d'          => 'Membuat error',
                 'correct_answer'    => 'B',
-                'explanation'       => 'Looping membuat program lebih singkat dan efisien karena tidak perlu menulis kode berulang.'
+                'explanation'       => 'Looping membuat program lebih singkat dan efisien karena tidak perlu menulis kode berulang.',
+                'is_practice'       => false,
+                'subject'           => 'python',
             ],
 
             // =========================
@@ -528,7 +601,9 @@ class QuestionSeeder extends Seeder
                 'option_c'          => '8',
                 'option_d'          => '7',
                 'correct_answer'    => 'C',
-                'explanation'       => 'Perkalian dikerjakan lebih dulu. 3 x 2 = 6 lalu ditambah 2 menjadi 8.'
+                'explanation'       => 'Perkalian dikerjakan lebih dulu. 3 x 2 = 6 lalu ditambah 2 menjadi 8.',
+                'is_practice'       => false,
+                'subject'           => 'python',
             ],
 
             // =========================
@@ -542,7 +617,9 @@ class QuestionSeeder extends Seeder
                 'option_c'          => '8',
                 'option_d'          => '1',
                 'correct_answer'    => 'B',
-                'explanation'       => '// adalah pembagian bulat. Jadi 15 dibagi 2 hasil bulatnya 7.'
+                'explanation'       => '// adalah pembagian bulat. Jadi 15 dibagi 2 hasil bulatnya 7.',
+                'is_practice'       => false,
+                'subject'           => 'python',
             ],
 
             // =========================
@@ -556,7 +633,9 @@ class QuestionSeeder extends Seeder
                 'option_c'          => '"Halo"',
                 'option_d'          => '20.5',
                 'correct_answer'    => 'C',
-                'explanation'       => 'String adalah teks dan biasanya ditulis di dalam tanda kutip.'
+                'explanation'       => 'String adalah teks dan biasanya ditulis di dalam tanda kutip.',
+                'is_practice'       => false,
+                'subject'           => 'python',
             ],
 
             // =========================
@@ -570,7 +649,9 @@ class QuestionSeeder extends Seeder
                 'option_c'          => 'Menutup aplikasi',
                 'option_d'          => 'Membuat error',
                 'correct_answer'    => 'B',
-                'explanation'       => 'Variabel digunakan untuk menyimpan data agar bisa dipakai kembali.'
+                'explanation'       => 'Variabel digunakan untuk menyimpan data agar bisa dipakai kembali.',
+                'is_practice'       => false,
+                'subject'           => 'python',
             ],
 
             // =========================
@@ -584,7 +665,9 @@ class QuestionSeeder extends Seeder
                 'option_c'          => '=',
                 'option_d'          => 'Error',
                 'correct_answer'    => 'A',
-                'explanation'       => 'Variabel umur menyimpan nilai 14.'
+                'explanation'       => 'Variabel umur menyimpan nilai 14.',
+                'is_practice'       => false,
+                'subject'           => 'python',
             ],
 
             // =========================
@@ -598,7 +681,9 @@ class QuestionSeeder extends Seeder
                 'option_c'          => '20',
                 'option_d'          => '15',
                 'correct_answer'    => 'B',
-                'explanation'       => 'Perkalian lebih dulu: 5 x 2 = 10, lalu 20 - 10 = 10.'
+                'explanation'       => 'Perkalian lebih dulu: 5 x 2 = 10, lalu 20 - 10 = 10.',
+                'is_practice'       => false,
+                'subject'           => 'python',
             ],
 
             // =========================
@@ -612,7 +697,9 @@ class QuestionSeeder extends Seeder
                 'option_c'          => 'Tidak sama dengan',
                 'option_d'          => 'Penjumlahan',
                 'correct_answer'    => 'B',
-                'explanation'       => '> digunakan untuk membandingkan apakah nilai kiri lebih besar.'
+                'explanation'       => '> digunakan untuk membandingkan apakah nilai kiri lebih besar.',
+                'is_practice'       => false,
+                'subject'           => 'python',
             ],
 
             // =========================
@@ -626,7 +713,9 @@ class QuestionSeeder extends Seeder
                 'option_c'          => 'False',
                 'option_d'          => '3',
                 'correct_answer'    => 'C',
-                'explanation'       => '8 tidak lebih kecil dari 3, maka hasilnya False.'
+                'explanation'       => '8 tidak lebih kecil dari 3, maka hasilnya False.',
+                'is_practice'       => false,
+                'subject'           => 'python',
             ],
 
             // =========================
@@ -640,7 +729,9 @@ class QuestionSeeder extends Seeder
                 'option_c'          => '==',
                 'option_d'          => '!=',
                 'correct_answer'    => 'B',
-                'explanation'       => '<= berarti lebih kecil atau sama dengan.'
+                'explanation'       => '<= berarti lebih kecil atau sama dengan.',
+                'is_practice'       => false,
+                'subject'           => 'python',
             ],
 
             // =========================
@@ -654,7 +745,9 @@ class QuestionSeeder extends Seeder
                 'option_c'          => 'Error',
                 'option_d'          => '1',
                 'correct_answer'    => 'B',
-                'explanation'       => 'Operator AND hanya menghasilkan True jika semua kondisi benar.'
+                'explanation'       => 'Operator AND hanya menghasilkan True jika semua kondisi benar.',
+                'is_practice'       => false,
+                'subject'           => 'python',
             ],
 
             // =========================
@@ -668,7 +761,9 @@ class QuestionSeeder extends Seeder
                 'option_c'          => '0',
                 'option_d'          => 'Error',
                 'correct_answer'    => 'A',
-                'explanation'       => 'OR akan menghasilkan True jika salah satu kondisi benar.'
+                'explanation'       => 'OR akan menghasilkan True jika salah satu kondisi benar.',
+                'is_practice'       => false,
+                'subject'           => 'python',
             ],
 
             // =========================
@@ -682,7 +777,9 @@ class QuestionSeeder extends Seeder
                 'option_c'          => 'Ingin membuat list',
                 'option_d'          => 'Ingin menghapus data',
                 'correct_answer'    => 'B',
-                'explanation'       => 'if digunakan untuk memeriksa kondisi tertentu.'
+                'explanation'       => 'if digunakan untuk memeriksa kondisi tertentu.',
+                'is_practice'       => false,
+                'subject'           => 'python',
             ],
 
             // =========================
@@ -696,7 +793,9 @@ class QuestionSeeder extends Seeder
                 'option_c'          => 'Tidak Lulus',
                 'option_d'          => 'Error',
                 'correct_answer'    => 'C',
-                'explanation'       => 'Karena 50 kurang dari 75 maka kondisi salah dan else dijalankan.'
+                'explanation'       => 'Karena 50 kurang dari 75 maka kondisi salah dan else dijalankan.',
+                'is_practice'       => false,
+                'subject'           => 'python',
             ],
 
             // =========================
@@ -710,7 +809,9 @@ class QuestionSeeder extends Seeder
                 'option_c'          => 'Menghapus kondisi',
                 'option_d'          => 'Menyimpan data',
                 'correct_answer'    => 'B',
-                'explanation'       => 'elif dipakai jika ada beberapa kondisi yang ingin diperiksa.'
+                'explanation'       => 'elif dipakai jika ada beberapa kondisi yang ingin diperiksa.',
+                'is_practice'       => false,
+                'subject'           => 'python',
             ],
 
             // =========================
@@ -724,7 +825,9 @@ class QuestionSeeder extends Seeder
                 'option_c'          => '0 1 2 3',
                 'option_d'          => '1 2',
                 'correct_answer'    => 'B',
-                'explanation'       => 'range(3) menghasilkan angka mulai dari 0 sampai sebelum 3.'
+                'explanation'       => 'range(3) menghasilkan angka mulai dari 0 sampai sebelum 3.',
+                'is_practice'       => false,
+                'subject'           => 'python',
             ],
 
             // =========================
@@ -738,7 +841,9 @@ class QuestionSeeder extends Seeder
                 'option_c'          => 'Input data',
                 'option_d'          => 'Menghapus data',
                 'correct_answer'    => 'B',
-                'explanation'       => 'for digunakan untuk melakukan pengulangan sejumlah tertentu.'
+                'explanation'       => 'for digunakan untuk melakukan pengulangan sejumlah tertentu.',
+                'is_practice'       => false,
+                'subject'           => 'python',
             ],
 
             // =========================
@@ -752,7 +857,9 @@ class QuestionSeeder extends Seeder
                 'option_c'          => '3',
                 'option_d'          => '4',
                 'correct_answer'    => 'B',
-                'explanation'       => 'range(2) berarti pengulangan dilakukan 2 kali.'
+                'explanation'       => 'range(2) berarti pengulangan dilakukan 2 kali.',
+                'is_practice'       => false,
+                'subject'           => 'python',
             ],
 
             // =========================
@@ -766,7 +873,9 @@ class QuestionSeeder extends Seeder
                 'option_c'          => 'Ada print',
                 'option_d'          => 'Ada variabel',
                 'correct_answer'    => 'B',
-                'explanation'       => 'while hanya berjalan selama kondisi masih True.'
+                'explanation'       => 'while hanya berjalan selama kondisi masih True.',
+                'is_practice'       => false,
+                'subject'           => 'python',
             ],
 
             // =========================
@@ -780,7 +889,9 @@ class QuestionSeeder extends Seeder
                 'option_c'          => 'Membuat input',
                 'option_d'          => 'Menyimpan file',
                 'correct_answer'    => 'A',
-                'explanation'       => 'Nested loop dipakai saat ada pengulangan di dalam pengulangan.'
+                'explanation'       => 'Nested loop dipakai saat ada pengulangan di dalam pengulangan.',
+                'is_practice'       => false,
+                'subject'           => 'python',
             ],
 
             // =========================
@@ -794,7 +905,9 @@ class QuestionSeeder extends Seeder
                 'option_c'          => '0 1 2 3',
                 'option_d'          => '3',
                 'correct_answer'    => 'B',
-                'explanation'       => 'range(3) menghasilkan angka 0, 1, dan 2.'
+                'explanation'       => 'range(3) menghasilkan angka 0, 1, dan 2.',
+                'is_practice'       => false,
+                'subject'           => 'python',
             ],
 
             // =========================
@@ -808,7 +921,9 @@ class QuestionSeeder extends Seeder
                 'option_c'          => '[]',
                 'option_d'          => '<>',
                 'correct_answer'    => 'C',
-                'explanation'       => 'List menggunakan tanda kurung siku [].'
+                'explanation'       => 'List menggunakan tanda kurung siku [].',
+                'is_practice'       => false,
+                'subject'           => 'python',
             ],
 
             // =========================
@@ -822,7 +937,9 @@ class QuestionSeeder extends Seeder
                 'option_c'          => '2',
                 'option_d'          => '3',
                 'correct_answer'    => 'B',
-                'explanation'       => 'Index pertama list dimulai dari 0.'
+                'explanation'       => 'Index pertama list dimulai dari 0.',
+                'is_practice'       => false,
+                'subject'           => 'python',
             ],
 
             // =========================
@@ -836,7 +953,9 @@ class QuestionSeeder extends Seeder
                 'option_c'          => 'Mengulang data',
                 'option_d'          => 'Menampilkan error',
                 'correct_answer'    => 'B',
-                'explanation'       => 'Index membantu mengambil data tertentu dalam list.'
+                'explanation'       => 'Index membantu mengambil data tertentu dalam list.',
+                'is_practice'       => false,
+                'subject'           => 'python',
             ],
 
             // =========================
@@ -850,7 +969,9 @@ class QuestionSeeder extends Seeder
                 'option_c'          => '0',
                 'option_d'          => '2',
                 'correct_answer'    => 'B',
-                'explanation'       => '9 dibagi 2 sisanya 1.'
+                'explanation'       => '9 dibagi 2 sisanya 1.',
+                'is_practice'       => false,
+                'subject'           => 'python',
             ],
 
             // =========================
@@ -864,7 +985,9 @@ class QuestionSeeder extends Seeder
                 'option_c'          => '20',
                 'option_d'          => '18',
                 'correct_answer'    => 'A',
-                'explanation'       => 'Perkalian lebih dulu: 4 x 5 = 20 lalu ditambah 2 menjadi 22.'
+                'explanation'       => 'Perkalian lebih dulu: 4 x 5 = 20 lalu ditambah 2 menjadi 22.',
+                'is_practice'       => false,
+                'subject'           => 'python',
             ],
 
             // =========================
@@ -878,7 +1001,9 @@ class QuestionSeeder extends Seeder
                 'option_c'          => '6',
                 'option_d'          => '9',
                 'correct_answer'    => 'B',
-                'explanation'       => '12 dibagi 3 hasilnya 4.'
+                'explanation'       => '12 dibagi 3 hasilnya 4.',
+                'is_practice'       => false,
+                'subject'           => 'python',
             ],
 
             // =========================
@@ -892,7 +1017,9 @@ class QuestionSeeder extends Seeder
                 'option_c'          => '"Python"',
                 'option_d'          => 'Error',
                 'correct_answer'    => 'B',
-                'explanation'       => 'print() akan menampilkan isi di dalamnya.'
+                'explanation'       => 'print() akan menampilkan isi di dalamnya.',
+                'is_practice'       => false,
+                'subject'           => 'python',
             ],
 
             // =========================
@@ -906,7 +1033,9 @@ class QuestionSeeder extends Seeder
                 'option_c'          => '/',
                 'option_d'          => '%',
                 'correct_answer'    => 'C',
-                'explanation'       => '/ digunakan untuk operasi pembagian.'
+                'explanation'       => '/ digunakan untuk operasi pembagian.',
+                'is_practice'       => false,
+                'subject'           => 'python',
             ],
 
             // =========================
@@ -920,7 +1049,9 @@ class QuestionSeeder extends Seeder
                 'option_c'          => 'Operator',
                 'option_d'          => 'Komentar',
                 'correct_answer'    => 'B',
-                'explanation'       => 'Titik dua menandakan bahwa ada blok kode setelah if.'
+                'explanation'       => 'Titik dua menandakan bahwa ada blok kode setelah if.',
+                'is_practice'       => false,
+                'subject'           => 'python',
             ],
 
             // =========================
@@ -934,7 +1065,9 @@ class QuestionSeeder extends Seeder
                 'option_c'          => '7',
                 'option_d'          => '8',
                 'correct_answer'    => 'B',
-                'explanation'       => '7 tidak sama dengan 8 sehingga hasilnya False.'
+                'explanation'       => '7 tidak sama dengan 8 sehingga hasilnya False.',
+                'is_practice'       => false,
+                'subject'           => 'python',
             ],
 
             // =========================
@@ -948,7 +1081,9 @@ class QuestionSeeder extends Seeder
                 'option_c'          => '7',
                 'option_d'          => 'Error',
                 'correct_answer'    => 'A',
-                'explanation'       => '7 memang tidak sama dengan 8 sehingga hasilnya True.'
+                'explanation'       => '7 memang tidak sama dengan 8 sehingga hasilnya True.',
+                'is_practice'       => false,
+                'subject'           => 'python',
             ],
 
             // =========================
@@ -962,7 +1097,9 @@ class QuestionSeeder extends Seeder
                 'option_c'          => 'Variabel',
                 'option_d'          => 'Pengulangan',
                 'correct_answer'    => 'B',
-                'explanation'       => 'Output adalah hasil yang muncul dari program.'
+                'explanation'       => 'Output adalah hasil yang muncul dari program.',
+                'is_practice'       => false,
+                'subject'           => 'python',
             ],
 
             // =========================
@@ -976,7 +1113,9 @@ class QuestionSeeder extends Seeder
                 'option_c'          => 'Percabangan',
                 'option_d'          => 'Looping',
                 'correct_answer'    => 'A',
-                'explanation'       => 'Input adalah data yang diberikan user ke program.'
+                'explanation'       => 'Input adalah data yang diberikan user ke program.',
+                'is_practice'       => false,
+                'subject'           => 'python',
             ],
 
             // =========================
@@ -990,7 +1129,9 @@ class QuestionSeeder extends Seeder
                 'option_c'          => '100',
                 'option_d'          => '50',
                 'correct_answer'    => 'B',
-                'explanation'       => '100 memang lebih besar dari 50.'
+                'explanation'       => '100 memang lebih besar dari 50.',
+                'is_practice'       => false,
+                'subject'           => 'python',
             ],
 
             // =========================
@@ -1004,7 +1145,9 @@ class QuestionSeeder extends Seeder
                 'option_c'          => 'Menghentikan looping',
                 'option_d'          => 'Membuat error',
                 'correct_answer'    => 'A',
-                'explanation'       => 'Variabel membantu menyimpan data dalam program.'
+                'explanation'       => 'Variabel membantu menyimpan data dalam program.',
+                'is_practice'       => false,
+                'subject'           => 'python',
             ],
 
             // =========================
@@ -1018,7 +1161,9 @@ class QuestionSeeder extends Seeder
                 'option_c'          => '30',
                 'option_d'          => '5',
                 'correct_answer'    => 'B',
-                'explanation'       => 'Pembagian dikerjakan lebih dulu. 5 / 5 = 1 lalu 25 + 1 = 26.'
+                'explanation'       => 'Pembagian dikerjakan lebih dulu. 5 / 5 = 1 lalu 25 + 1 = 26.',
+                'is_practice'       => false,
+                'subject'           => 'python',
             ],
 
             // =========================
@@ -1032,7 +1177,9 @@ class QuestionSeeder extends Seeder
                 'option_c'          => '1nilai',
                 'option_d'          => 'umur',
                 'correct_answer'    => 'C',
-                'explanation'       => 'Variabel tidak boleh diawali angka.'
+                'explanation'       => 'Variabel tidak boleh diawali angka.',
+                'is_practice'       => false,
+                'subject'           => 'python',
             ],
 
             // =========================
@@ -1046,7 +1193,9 @@ class QuestionSeeder extends Seeder
                 'option_c'          => '6',
                 'option_d'          => 'Error',
                 'correct_answer'    => 'A',
-                'explanation'       => '6 sama dengan 6 sehingga hasilnya True.'
+                'explanation'       => '6 sama dengan 6 sehingga hasilnya True.',
+                'is_practice'       => false,
+                'subject'           => 'python',
             ],
 
             // =========================
@@ -1060,7 +1209,9 @@ class QuestionSeeder extends Seeder
                 'option_c'          => 'Membuat variabel',
                 'option_d'          => 'Menghapus data',
                 'correct_answer'    => 'A',
-                'explanation'       => 'else dijalankan ketika kondisi if tidak terpenuhi.'
+                'explanation'       => 'else dijalankan ketika kondisi if tidak terpenuhi.',
+                'is_practice'       => false,
+                'subject'           => 'python',
             ],
 
             // =========================
@@ -1074,7 +1225,9 @@ class QuestionSeeder extends Seeder
                 'option_c'          => '5 > 3',
                 'option_d'          => 'Error',
                 'correct_answer'    => 'B',
-                'explanation'       => 'Karena 5 lebih besar dari 3 maka kondisi bernilai True.'
+                'explanation'       => 'Karena 5 lebih besar dari 3 maka kondisi bernilai True.',
+                'is_practice'       => false,
+                'subject'           => 'python',
             ],
 
             // =========================
@@ -1088,7 +1241,9 @@ class QuestionSeeder extends Seeder
                 'option_c'          => '1',
                 'option_d'          => 'Error',
                 'correct_answer'    => 'B',
-                'explanation'       => 'OR hanya menghasilkan False jika semua kondisi False.'
+                'explanation'       => 'OR hanya menghasilkan False jika semua kondisi False.',
+                'is_practice'       => false,
+                'subject'           => 'python',
             ],
 
             // =========================
@@ -1102,7 +1257,9 @@ class QuestionSeeder extends Seeder
                 'option_c'          => 'True',
                 'option_d'          => 'Error',
                 'correct_answer'    => 'C',
-                'explanation'       => 'AND menghasilkan True jika semua kondisi benar.'
+                'explanation'       => 'AND menghasilkan True jika semua kondisi benar.',
+                'is_practice'       => false,
+                'subject'           => 'python',
             ],
 
             // =========================
@@ -1116,7 +1273,9 @@ class QuestionSeeder extends Seeder
                 'option_c'          => '9',
                 'option_d'          => '7',
                 'correct_answer'    => 'B',
-                'explanation'       => '3 x 3 = 9 lalu ditambah 1 menjadi 10.'
+                'explanation'       => '3 x 3 = 9 lalu ditambah 1 menjadi 10.',
+                'is_practice'       => false,
+                'subject'           => 'python',
             ],
 
             // =========================
@@ -1130,7 +1289,9 @@ class QuestionSeeder extends Seeder
                 'option_c'          => 'Menghapus variabel',
                 'option_d'          => 'Membuat input',
                 'correct_answer'    => 'B',
-                'explanation'       => 'range() membantu menentukan berapa kali loop berjalan.'
+                'explanation'       => 'range() membantu menentukan berapa kali loop berjalan.',
+                'is_practice'       => false,
+                'subject'           => 'python',
             ],
 
             // =========================
@@ -1144,7 +1305,9 @@ class QuestionSeeder extends Seeder
                 'option_c'          => '0 1 2 3 4',
                 'option_d'          => '4',
                 'correct_answer'    => 'A',
-                'explanation'       => 'range(4) menghasilkan angka dari 0 sampai sebelum 4.'
+                'explanation'       => 'range(4) menghasilkan angka dari 0 sampai sebelum 4.',
+                'is_practice'       => false,
+                'subject'           => 'python',
             ],
 
             // =========================
@@ -1158,7 +1321,9 @@ class QuestionSeeder extends Seeder
                 'option_c'          => '4 + 4',
                 'option_d'          => 'Error',
                 'correct_answer'    => 'B',
-                'explanation'       => 'Python akan menghitung 4 + 4 menjadi 8.'
+                'explanation'       => 'Python akan menghitung 4 + 4 menjadi 8.',
+                'is_practice'       => false,
+                'subject'           => 'python',
             ],
 
             // =========================
@@ -1172,7 +1337,9 @@ class QuestionSeeder extends Seeder
                 'option_c'          => 'Menghapus error',
                 'option_d'          => 'Membuat looping',
                 'correct_answer'    => 'B',
-                'explanation'       => 'Komentar membantu programmer memahami kode.'
+                'explanation'       => 'Komentar membantu programmer memahami kode.',
+                'is_practice'       => false,
+                'subject'           => 'python',
             ],
 
             // =========================
@@ -1186,7 +1353,9 @@ class QuestionSeeder extends Seeder
                 'option_c'          => '4',
                 'option_d'          => '0',
                 'correct_answer'    => 'A',
-                'explanation'       => '14 dibagi 4 sisanya 2.'
+                'explanation'       => '14 dibagi 4 sisanya 2.',
+                'is_practice'       => false,
+                'subject'           => 'python',
             ],
 
             // =========================
@@ -1200,7 +1369,9 @@ class QuestionSeeder extends Seeder
                 'option_c'          => '9',
                 'option_d'          => '10',
                 'correct_answer'    => 'B',
-                'explanation'       => '9 tidak lebih besar atau sama dengan 10.'
+                'explanation'       => '9 tidak lebih besar atau sama dengan 10.',
+                'is_practice'       => false,
+                'subject'           => 'python',
             ],
 
             // =========================
@@ -1214,7 +1385,9 @@ class QuestionSeeder extends Seeder
                 'option_c'          => 'Halo Dunia',
                 'option_d'          => 'Error',
                 'correct_answer'    => 'C',
-                'explanation'       => 'Teks dapat digabung menggunakan tanda +.'
+                'explanation'       => 'Teks dapat digabung menggunakan tanda +.',
+                'is_practice'       => false,
+                'subject'           => 'python',
             ],
 
             // =========================
@@ -1228,7 +1401,9 @@ class QuestionSeeder extends Seeder
                 'option_c'          => 'Menghentikan looping',
                 'option_d'          => 'Membuat gambar',
                 'correct_answer'    => 'A',
-                'explanation'       => 'List memudahkan penyimpanan banyak data dalam satu variabel.'
+                'explanation'       => 'List memudahkan penyimpanan banyak data dalam satu variabel.',
+                'is_practice'       => false,
+                'subject'           => 'python',
             ],
 
             // =========================
@@ -1242,7 +1417,9 @@ class QuestionSeeder extends Seeder
                 'option_c'          => 'C',
                 'option_d'          => 'Error',
                 'correct_answer'    => 'C',
-                'explanation'       => 'Index ke-2 berarti data ketiga dalam list.'
+                'explanation'       => 'Index ke-2 berarti data ketiga dalam list.',
+                'is_practice'       => false,
+                'subject'           => 'python',
             ],
 
             // =========================
@@ -1256,7 +1433,9 @@ class QuestionSeeder extends Seeder
                 'option_c'          => 'Python Python',
                 'option_d'          => 'Error',
                 'correct_answer'    => 'B',
-                'explanation'       => 'range(1) berarti pengulangan hanya 1 kali.'
+                'explanation'       => 'range(1) berarti pengulangan hanya 1 kali.',
+                'is_practice'       => false,
+                'subject'           => 'python',
             ],
 
             // =========================
@@ -1270,7 +1449,9 @@ class QuestionSeeder extends Seeder
                 'option_c'          => '4',
                 'option_d'          => '2',
                 'correct_answer'    => 'B',
-                'explanation'       => 'Perkalian lebih dulu: 2 x 2 = 4 lalu ditambah 2 menjadi 6.'
+                'explanation'       => 'Perkalian lebih dulu: 2 x 2 = 4 lalu ditambah 2 menjadi 6.',
+                'is_practice'       => false,
+                'subject'           => 'python',
             ],
 
             // =========================
@@ -1284,7 +1465,9 @@ class QuestionSeeder extends Seeder
                 'option_c'          => 'Menghapus data',
                 'option_d'          => 'Mengulang program',
                 'correct_answer'    => 'B',
-                'explanation'       => 'print digunakan untuk menampilkan hasil ke layar.'
+                'explanation'       => 'print digunakan untuk menampilkan hasil ke layar.',
+                'is_practice'       => false,
+                'subject'           => 'python',
             ],
 
             // =========================
@@ -1298,7 +1481,9 @@ class QuestionSeeder extends Seeder
                 'option_c'          => '7',
                 'option_d'          => '8',
                 'correct_answer'    => 'C',
-                'explanation'       => '30 dibagi 5 = 6 lalu ditambah 1 menjadi 7.'
+                'explanation'       => '30 dibagi 5 = 6 lalu ditambah 1 menjadi 7.',
+                'is_practice'       => false,
+                'subject'           => 'python',
             ],
 
             // =========================
@@ -1312,7 +1497,9 @@ class QuestionSeeder extends Seeder
                 'option_c'          => '8',
                 'option_d'          => '6',
                 'correct_answer'    => 'A',
-                'explanation'       => 'Yang di dalam kurung dikerjakan lebih dulu: 2 + 1 = 3 lalu dikali 5 menjadi 15.'
+                'explanation'       => 'Yang di dalam kurung dikerjakan lebih dulu: 2 + 1 = 3 lalu dikali 5 menjadi 15.',
+                'is_practice'       => false,
+                'subject'           => 'python',
             ],
 
             // =========================
@@ -1326,7 +1513,9 @@ class QuestionSeeder extends Seeder
                 'option_c'          => '0',
                 'option_d'          => '2',
                 'correct_answer'    => 'B',
-                'explanation'       => '11 dibagi 2 sisanya 1.'
+                'explanation'       => '11 dibagi 2 sisanya 1.',
+                'is_practice'       => false,
+                'subject'           => 'python',
             ],
 
             // =========================
@@ -1340,7 +1529,9 @@ class QuestionSeeder extends Seeder
                 'option_c'          => '1',
                 'option_d'          => '0',
                 'correct_answer'    => 'B',
-                'explanation'       => 'AND hanya bernilai True jika semua kondisi benar.'
+                'explanation'       => 'AND hanya bernilai True jika semua kondisi benar.',
+                'is_practice'       => false,
+                'subject'           => 'python',
             ],
 
             // =========================
@@ -1354,7 +1545,9 @@ class QuestionSeeder extends Seeder
                 'option_c'          => 'Belajar Python',
                 'option_d'          => 'Error',
                 'correct_answer'    => 'C',
-                'explanation'       => 'print akan menampilkan teks yang ada di dalam tanda kutip.'
+                'explanation'       => 'print akan menampilkan teks yang ada di dalam tanda kutip.',
+                'is_practice'       => false,
+                'subject'           => 'python',
             ],
 
             // =========================
@@ -1368,7 +1561,9 @@ class QuestionSeeder extends Seeder
                 'option_c'          => '50',
                 'option_d'          => '20',
                 'correct_answer'    => 'B',
-                'explanation'       => '50 tidak lebih kecil dari 20 sehingga hasilnya False.'
+                'explanation'       => '50 tidak lebih kecil dari 20 sehingga hasilnya False.',
+                'is_practice'       => false,
+                'subject'           => 'python',
             ],
 
             // =========================
@@ -1382,7 +1577,9 @@ class QuestionSeeder extends Seeder
                 'option_c'          => '0 1 2',
                 'option_d'          => '2',
                 'correct_answer'    => 'B',
-                'explanation'       => 'range(2) menghasilkan angka 0 dan 1.'
+                'explanation'       => 'range(2) menghasilkan angka 0 dan 1.',
+                'is_practice'       => false,
+                'subject'           => 'python',
             ],
 
             // =========================
@@ -1396,7 +1593,9 @@ class QuestionSeeder extends Seeder
                 'option_c'          => '30',
                 'option_d'          => '1',
                 'correct_answer'    => 'B',
-                'explanation'       => 'Index ke-1 berarti data kedua dalam list.'
+                'explanation'       => 'Index ke-1 berarti data kedua dalam list.',
+                'is_practice'       => false,
+                'subject'           => 'python',
             ],
 
             // =========================
@@ -1410,7 +1609,9 @@ class QuestionSeeder extends Seeder
                 'option_c'          => 'Menyimpan data',
                 'option_d'          => 'Menghapus data',
                 'correct_answer'    => 'B',
-                'explanation'       => '== digunakan untuk mengecek apakah dua nilai sama.'
+                'explanation'       => '== digunakan untuk mengecek apakah dua nilai sama.',
+                'is_practice'       => false,
+                'subject'           => 'python',
             ],
 
             // =========================
@@ -1424,7 +1625,9 @@ class QuestionSeeder extends Seeder
                 'option_c'          => 'Agar variabel hilang',
                 'option_d'          => 'Agar program error',
                 'correct_answer'    => 'B',
-                'explanation'       => 'Looping membantu program melakukan tugas berulang secara otomatis sehingga lebih efisien.'
+                'explanation'       => 'Looping membantu program melakukan tugas berulang secara otomatis sehingga lebih efisien.',
+                'is_practice'       => false,
+                'subject'           => 'logika',
             ],
 
         ];

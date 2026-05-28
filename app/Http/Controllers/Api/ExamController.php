@@ -16,10 +16,10 @@ class ExamController extends Controller
     public function login(Request $request)
     {
         $request->validate([
-            'name'      => 'required',
-            'class'     => 'required',
-            'subject'   => 'required',
-            'token'     => 'required'
+            'name'      => 'required|string',
+            'class'     => 'required|string',
+            'subject'   => 'required|string',
+            'token'     => 'required|string'
         ]);
 
         $currentToken   = Setting::where('key', 'current_token')->first()->value;
@@ -65,6 +65,14 @@ class ExamController extends Controller
     {
         $request->validate(['session_id' => 'required']);
         $session = ExamSession::find($request->session_id);
+
+        if (!$session) {
+            return response()->json([
+                'success' => false, 
+                'message' => 'Sesi tidak ditemukan.'
+            ], 404);
+        }
+
         $examStatus = Setting::where('key', 'exam_status')->first()->value;
 
         if ($examStatus === 'waiting') {
@@ -98,7 +106,12 @@ class ExamController extends Controller
     public function submitExam(Request $request)
     {
         $session = ExamSession::find($request->session_id);
-        if (!$session || $session->is_finished) return response()->json(['success' => false]);
+        if (!$session || $session->is_finished) {
+            return response()->json([
+                'success'   => false,
+                'message'   => 'Sesi tidak valid atau sudah selesai.'
+            ]);
+        }
 
         $questions  = Question::where('is_practice', false)->where('subject', $session->subject)->get();
         $score      = 0;
@@ -113,7 +126,8 @@ class ExamController extends Controller
                 'question_text'     => $q->question_text,
                 'student_answer'    => $studentAns,
                 'correct_answer'    => $q->correct_answer,
-                'is_correct'        => $isCorrect
+                'is_correct'        => $isCorrect,
+                'explanation'       => $q->explanation
             ];
         }
 
@@ -124,7 +138,7 @@ class ExamController extends Controller
             'student_class'     => $session->student_class,
             'subject'           => $session->subject,
             'score'             => $finalScore,
-            'answers_summary'   => \json_encode($summary)
+            'answers_summary'   => json_encode($summary)
         ]);
 
         $session->update(['is_finished' => true, 'remaining_time' => 0]);
