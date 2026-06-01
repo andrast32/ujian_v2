@@ -1,16 +1,29 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from "react";
 import axios from 'axios';
 import Swal from 'sweetalert2';
-import { Shield, GraduationCap, Trophy, LogOut, CheckCircle, Clock, BookOpen, AlertTriangle, ChevronRight, ChevronLeft, HelpCircle } from 'lucide-react';
+import { 
+  Shield, 
+  GraduationCap, 
+  Trophy, 
+  LogOut, 
+  CheckCircle, 
+  Clock, 
+  BookOpen, 
+  AlertTriangle, 
+  ChevronRight, 
+  ChevronLeft, 
+  HelpCircle,
+  RefreshCw // Icon baru untuk tombol generate
+} from 'lucide-react';
 
 axios.defaults.baseURL = 'http://localhost:8000/api';
 
 export default function App() {
-  // Navigation State (Diambil dari Local Storage agar anti-refresh)
-  const [view, setView] = useState(localStorage.getItem('app_view') || 'login-student'); 
 
-  // Student State (Di-backup ke Local Storage)
-  const [studentForm, setStudentForm] = useState({ name: '', class: '', subject: 'python', token: '' });
+  const [view, setView] = useState(localStorage.getItem('app_view') || 'login-student');
+
+  // student state
+  const [studentForm, setStudentForm] = useState({ name: '', class: '', subject: 'python', token: ''});
   const [sessionId, setSessionId] = useState(localStorage.getItem('app_session') || null);
   const [remainingTime, setRemainingTime] = useState(localStorage.getItem('app_timer') ? parseInt(localStorage.getItem('app_timer')) : 0);
   const [questions, setQuestions] = useState([]);
@@ -19,38 +32,56 @@ export default function App() {
   const [examResultSummary, setExamResultSummary] = useState([]);
   const [finalScore, setFinalScore] = useState(0);
 
-  // Admin State
-  const [adminForm, setAdminForm] = useState({ email: 'admin@ujian.com', password: '' });
+  // admin state
+  const [adminForm, setAdminForm] = useState({ email: 'admin@sekolah.com', password: '' });
   const [adminDashboard, setAdminDashboard] = useState({
-    exam_status: 'waiting', current_token: 'TOKEN123', exam_duration: 1800, total_students: 0, finished_students: 0
+    exam_status: 'waiting',
+    current_token: 'TOKEN123',
+    exam_duration: 1800,
+    total_students: 0,
+    finished_students: 0
   });
-  const [filterLeaderboard, setFilterLeaderboard] = useState({ subject: 'python', class: 'all' });
+  const [filterLeaderboard, setFilterLeaderboard] = useState({subject: 'python', class: 'all'});
   const [leaderboardData, setLeaderboardData] = useState([]);
 
   const timerRef = useRef(null);
 
-  // ==========================================
-  // LOGIKA SISWA (STUDENT HANDLERS)
-  // ==========================================
+  // =====================
+  // LOGIKA UTAMA SISWA
+  // =====================
+
   const handleStudentLogin = async () => {
     try {
       const res = await axios.post('/login', studentForm);
       if (res.data.success) {
-        // Simpan sesi ke memori browser agar anti logout
         setSessionId(res.data.session_id);
         localStorage.setItem('app_session', res.data.session_id);
-        
+
         setRemainingTime(res.data.remaining_time);
         localStorage.setItem('app_timer', res.data.remaining_time);
 
-        Swal.fire({ icon: 'success', title: 'Autentikasi Berhasil', text: 'Selamat datang di ruang ujian.', timer: 1500, showConfirmButton: false, background: '#0f172a', color: '#f8fafc' });
-        
+        Swal.fire({
+          icon: 'success',
+          title: 'Login berhasil',
+          text: 'Selamat datang di ruang ujian.',
+          timer: 1500,
+          showConfirmButton: false, 
+          background: '#0f172a', 
+          color: '#f8fafc'
+        });
+
         const nextView = res.data.exam_status === 'waiting' ? 'waiting-room' : 'exam';
         setView(nextView);
-        localStorage.setItem('app_view', nextView); // Kunci halaman saat ini
+        localStorage.setItem('app_view', nextView);
       }
     } catch (err) {
-      Swal.fire({ icon: 'error', title: 'Gagal Masuk', text: err.response?.data?.message || 'Terjadi kesalahan sistem.', background: '#0f172a', color: '#f8fafc' });
+      Swal.fire({
+        icon: 'error',
+        title: 'Kamu Gagal Masuk',
+        text: err.response?.data?.message || 'Terjadi kesalahan pada sistem.', 
+        background: '#0f172a', 
+        color: '#f8fafc'
+      });
     }
   };
 
@@ -60,31 +91,30 @@ export default function App() {
     const fetchQuestions = async () => {
       try {
         const res = await axios.get(`/questions?session_id=${sessionId}`);
-        
-        // Pemicu otomatis masuk ujian jika admin klik Mulai
         if (view === 'waiting-room' && res.data.status === 'started') {
-          Swal.fire({ 
-            icon: 'info', 
-            title: 'Ujian Dimulai!', 
-            text: 'Pengawas telah mengaktifkan sesi ujian utama.', 
-            timer: 2000, 
+          Swal.fire({
+            icon: 'info',
+            title: 'Ujian Dimulai!',
+            text: "Ujian telah dimulai, berdo'a lah sebelum mengerjakan soal, dan tetaplah fokus.",
+            timer: 3500,
             showConfirmButton: false, 
             background: '#0f172a', 
-            color: '#f8fafc' 
+            color: '#f8fafc'
           });
           setView('exam');
           localStorage.setItem('app_view', 'exam');
 
-          setQuestions(res.data.data); 
+          setQuestions(res.data.data);
         } else if (view === 'waiting-room' || questions.length === 0) {
-          // Render soal hanya di ruang tunggu ATAU jika array soal di ujian masih kosong (baru dimuat)
           setQuestions(res.data.data);
         }
 
       } catch (err) {
-        console.error("Gagal mengambil materi soal", err);
+        console.error("Gagal ambil materi soal", err);
       }
     };
+
+    fetchQuestions(); // Tembakan pertama
 
     if (view === 'waiting-room') {
       const interval = setInterval(fetchQuestions, 4000);
@@ -94,13 +124,17 @@ export default function App() {
 
   useEffect(() => {
     if (view !== 'exam' || remainingTime <= 0) return;
+
     timerRef.current = setInterval(() => {
       setRemainingTime((prev) => {
         const nextTime = prev - 1;
-        localStorage.setItem('app_timer', nextTime); // Backup timer per detik!
-        
+        localStorage.setItem('app_timer', nextTime);
+
         if (nextTime % 10 === 0) {
-          axios.post('/sync-session', { session_id: sessionId, remaining_time: nextTime, answers });
+          axios.post('/sync-session', {
+            session_id: sessionId,
+            remaining_time: nextTime, answers
+          });
         }
         if (nextTime <= 0) {
           clearInterval(timerRef.current);
@@ -109,80 +143,147 @@ export default function App() {
         return nextTime;
       });
     }, 1000);
+
     return () => clearInterval(timerRef.current);
   }, [view, answers]);
 
   const handleSelectAnswer = (questionId, option) => {
     const newAnswers = { ...answers, [questionId]: option };
     setAnswers(newAnswers);
-    localStorage.setItem('app_answers', JSON.stringify(newAnswers)); // Backup jawaban saat itu juga!
+    localStorage.setItem('app_answers', JSON.stringify(newAnswers));
   };
 
   const handleFormatSubmit = async () => {
     clearInterval(timerRef.current);
     try {
-      const res = await axios.post('/submit', { session_id: sessionId, answers });
+      const activeQuestionIds = questions.map(q => q.id);
+
+      const res = await axios.post('/submit', {
+        session_id: sessionId, 
+        answers: answers,
+        question_ids: activeQuestionIds 
+      });
+
       if (res.data.success) {
         setFinalScore(res.data.score);
-        const resQuestions = await axios.get(`/questions?session_id=${sessionId}`);
-        setExamResultSummary(resQuestions.data.data);
-        Swal.fire({ icon: 'success', title: 'Ujian Selesai', text: 'Jawaban kamu telah aman tersimpan di database.', background: '#0f172a', color: '#f8fafc' });
         
+        setExamResultSummary(res.data.summary);
+
+        Swal.fire({
+          icon: 'success',
+          title: 'Ujian telah Selesai',
+          text: 'Jawaban kamu aman tersimpan di database.', 
+          background: '#0f172a', 
+          color: '#f8fafc'
+        });
         setView('review');
         localStorage.setItem('app_view', 'review');
       }
     } catch (err) {
-      Swal.fire({ icon: 'error', title: 'Gagal Mengirim', text: 'Koneksi bermasalah saat mengirim lembar jawaban.', background: '#0f172a', color: '#f8fafc' });
+      Swal.fire({ 
+        icon: 'error', 
+        title: 'Gagal Mengirim', 
+        text: 'Koneksi bermasalah saat mengirim lembar jawaban.', 
+        background: '#0f172a', 
+        color: '#f8fafc'
+      });
     }
   };
 
-  // ==========================================
-  // LOGIKA ADMIN (ADMIN HANDLERS)
-  // ==========================================
+  // =====================
+  // LOGIKA UTAMA ADMIN
+  // =====================
   const handleAdminLogin = async () => {
     try {
       const res = await axios.post('/admin/login', adminForm);
       if (res.data.success) {
-        Swal.fire({ icon: 'success', title: 'Akses Diterima', text: 'Selamat datang, Pengawas.', timer: 1500, showConfirmButton: false, background: '#0f172a', color: '#f8fafc' });
-        fetchAdminDashboard();
-        
+        Swal.fire({
+          icon: 'success',
+          title: 'Akses Diterima',
+          text: 'Selamat datang, Pengawas.',
+          timer: 1500,
+          showConfirmButton: false, 
+          background: '#0f172a', 
+          color: '#f8fafc'
+        });
+        fetchAdminDashboard(true); // Panggil penuh saat pertama login
+
         setView('admin-dashboard');
-        localStorage.setItem('app_view', 'admin-dashboard'); // Kunci admin agar tidak ter-logout saat direfresh
+        localStorage.setItem('app_view', 'admin-dashboard');
       }
     } catch (err) {
-      Swal.fire({ icon: 'error', title: 'Akses Ditolak', text: 'Email atau Password Admin salah!', background: '#0f172a', color: '#f8fafc' });
+      Swal.fire({
+        icon: 'error', 
+        title: 'Akses Ditolak', 
+        text: 'Email atau Password Admin salah!', 
+        background: '#0f172a', 
+        color: '#f8fafc'
+      });
     }
   };
 
-  const fetchAdminDashboard = async () => {
+  // FUNGSI PERBAIKAN: isInitial untuk mencegah input token tertimpa saat auto-refresh
+  const fetchAdminDashboard = async (isInitial = false) => {
     try {
       const res = await axios.get('/admin/dashboard?t=' + new Date().getTime());
-      setAdminDashboard(res.data);
+      if (isInitial) {
+        // Jika pertama buka, load semua data dari DB
+        setAdminDashboard(res.data);
+      } else {
+        // Jika auto-refresh, load HANYA angka statistik (siswa), jangan ganggu ketikan form
+        setAdminDashboard(prev => ({
+          ...prev,
+          total_students: res.data.total_students,
+          finished_students: res.data.finished_students
+        }));
+      }
     } catch (err) {
       console.error(err);
     }
   };
 
-  // FIX BUG EVENT: Memastikan parameter berwujud teks yang sah
   const handleSaveSettings = async (updatedStatus) => {
     try {
-      // Cegah error akibat parameter MouseEvent saat tombol diklik kosong
       const finalStatus = typeof updatedStatus === 'string' ? updatedStatus : adminDashboard.exam_status;
-      
+
       const payload = {
         exam_status: finalStatus,
         current_token: adminDashboard.current_token,
         exam_duration: parseInt(adminDashboard.exam_duration)
       };
-      
+
       const res = await axios.post('/admin/update-settings', payload);
       if (res.data.success) {
-        Swal.fire({ icon: 'success', title: 'Berhasil', text: 'Pengaturan sistem ujian diperbarui!', timer: 1500, showConfirmButton: false, background: '#0f172a', color: '#f8fafc' });
-        fetchAdminDashboard();
+        Swal.fire({
+          icon: 'success',
+          title: 'Berhasil',
+          text: 'Pengaturan sistem ujian telah diperbarui!',
+          timer: 1500,
+          showConfirmButton: false, 
+          background: '#0f172a', 
+          color: '#f8fafc'
+        });
+        fetchAdminDashboard(true); // Load ulang penuh dari DB setelah di-save
       }
     } catch (err) {
-      Swal.fire({ icon: 'error', title: 'Gagal', text: err.response?.data?.message || 'Gagal memperbarui pengaturan.', background: '#0f172a', color: '#f8fafc' });
+      Swal.fire({
+        icon: 'error', 
+        title: 'Gagal', 
+        text: err.response?.data?.message || 'Gagal memperbarui pengaturan.', 
+        background: '#0f172a', 
+        color: '#f8fafc'
+      });
     }
+  };
+
+  // FUNGSI BARU: GENERATE TOKEN ACAK 5 KARAKTER
+  const generateRandomToken = () => {
+    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+    let newToken = '';
+    for (let i = 0; i < 5; i++) {
+      newToken += chars.charAt(Math.floor(Math.random() * chars.length));
+    }
+    setAdminDashboard(prev => ({ ...prev, current_token: newToken }));
   };
 
   const fetchLeaderboard = async () => {
@@ -196,9 +297,10 @@ export default function App() {
 
   useEffect(() => {
     if (view === 'admin-dashboard') {
+      fetchAdminDashboard(true);
       fetchLeaderboard();
       const interval = setInterval(() => {
-        fetchAdminDashboard();
+        fetchAdminDashboard(false); // isInitial = false agar input tak tertimpa
         fetchLeaderboard();
       }, 5000);
       return () => clearInterval(interval);
@@ -211,10 +313,9 @@ export default function App() {
     return `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
   };
 
-  // Fungsi Log Out Aman yang Membersihkan Memory Browser
   const handleLogout = () => {
     clearInterval(timerRef.current); 
-    localStorage.clear(); // Sapu bersih semua memori!
+    localStorage.clear(); 
     setSessionId(null); 
     setQuestions([]); 
     setAnswers({});
@@ -284,7 +385,7 @@ export default function App() {
               </div>
               <div>
                 <label className="text-xs uppercase tracking-wider text-slate-400 font-bold block mb-2 pl-1">Token Akses</label>
-                <input type="text" placeholder="•••••" value={studentForm.token} onChange={e => setStudentForm({...studentForm, token: e.target.value})} className="w-full px-5 py-3.5 bg-slate-950/80 border border-slate-700/60 rounded-xl outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500/50 text-lg text-center font-mono font-black tracking-widest text-emerald-400 placeholder-slate-700" />
+                <input type="text" placeholder="•••••" value={studentForm.token} onChange={e => setStudentForm({...studentForm, token: e.target.value})} className="w-full px-5 py-3.5 bg-slate-950/80 border border-slate-700/60 rounded-xl outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500/50 text-lg text-center font-mono font-black tracking-widest text-emerald-400 placeholder-slate-700 uppercase" />
               </div>
               <button onClick={handleStudentLogin} className="w-full bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 text-slate-950 font-extrabold py-4 rounded-xl transition-all duration-300 shadow-[0_0_20px_rgba(16,185,129,0.3)] text-sm mt-4 tracking-wide transform active:scale-[0.98]">Mulai Validasi Sesi →</button>
             </div>
@@ -546,7 +647,23 @@ export default function App() {
                   </div>
                   <div>
                     <label className="text-[10px] font-bold text-slate-400 uppercase block mb-2 pl-1">Token Akses Aktif</label>
-                    <input type="text" value={adminDashboard.current_token} onChange={e => setAdminDashboard({...adminDashboard, current_token: e.target.value.toUpperCase()})} className="w-full px-4 py-3 bg-slate-950/80 border border-slate-700/60 rounded-xl outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500/50 font-mono text-center tracking-widest text-emerald-400 text-xl font-black shadow-inner" />
+                    {/* INPUT DIBUAT READONLY DENGAN TOMBOL GENERATE */}
+                    <div className="flex gap-2">
+                      <input 
+                        type="text" 
+                        readOnly // Anti ketik manual
+                        value={adminDashboard.current_token} 
+                        className="w-full px-4 py-3 bg-slate-950/80 border border-slate-700/60 rounded-xl outline-none focus:border-emerald-500 font-mono text-center tracking-widest text-emerald-400 text-xl font-black shadow-inner cursor-not-allowed" 
+                      />
+                      <button 
+                        type="button"
+                        onClick={generateRandomToken}
+                        className="bg-emerald-500 hover:bg-emerald-400 text-slate-950 p-3 rounded-xl transition-all shadow-md active:scale-[0.95] flex items-center justify-center group"
+                        title="Buat Token Baru"
+                      >
+                        <RefreshCw className="w-5 h-5 group-active:rotate-180 transition-transform duration-300" />
+                      </button>
+                    </div>
                   </div>
                   <div>
                     <label className="text-[10px] font-bold text-slate-400 uppercase block mb-2 pl-1">Batas Alokasi Waktu (Detik)</label>
@@ -580,7 +697,7 @@ export default function App() {
                 <div className="flex gap-3 items-center w-full sm:w-auto">
                   <select value={filterLeaderboard.subject} onChange={e => setFilterLeaderboard({...filterLeaderboard, subject: e.target.value})} className="px-4 py-2 bg-slate-950 border border-slate-700 text-slate-200 text-xs rounded-xl outline-none focus:border-emerald-500 font-bold cursor-pointer transition-colors shadow-inner">
                     <option value="python">Materi: Python</option>
-                    <option value="logika">Materi: logika</option>
+                    <option value="logika">Materi: Logika</option>
                   </select>
                   <input type="text" placeholder="Semua Kelas" value={filterLeaderboard.class === 'all' ? '' : filterLeaderboard.class} onChange={e => setFilterLeaderboard({...filterLeaderboard, class: e.target.value.toUpperCase() || 'all'})} className="w-32 px-4 py-2 bg-slate-950 border border-slate-700 text-xs text-center rounded-xl outline-none focus:border-emerald-500 font-bold text-slate-200 placeholder-slate-600 uppercase shadow-inner transition-colors" />
                 </div>

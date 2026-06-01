@@ -114,7 +114,7 @@ class ExamController extends Controller
             ]);
         }
 
-        $questions  = Question::where('is_practice', false)->where('subject', $session->subject)->get();
+        $questions  = Question::whereIn('id', $request->question_ids)->get();
         $score      = 0;
         $summary    = [];
 
@@ -124,7 +124,12 @@ class ExamController extends Controller
             if ($isCorrect) $score++;
 
             $summary[] = [
+                'id'                => $q->id,
                 'question_text'     => $q->question_text,
+                'option_a'          => $q->option_a,
+                'option_b'          => $q->option_b,
+                'option_c'          => $q->option_c,
+                'option_d'          => $q->option_d,
                 'student_answer'    => $studentAns,
                 'correct_answer'    => $q->correct_answer,
                 'is_correct'        => $isCorrect,
@@ -145,7 +150,8 @@ class ExamController extends Controller
         $session->update(['is_finished' => true, 'remaining_time' => 0]);
         return response()->json([
             'success'   => true,
-            'score'     => $finalScore
+            'score'     => $finalScore,
+            'summary'   => $summary
         ]);
     }
 
